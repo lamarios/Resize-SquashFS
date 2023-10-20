@@ -28,22 +28,17 @@ fi
     #BUILDER="https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-imagebuilder-x86-64.Linux-x86_64.tar.xz" # Current snapshot
 
 # Select the desired SquashFS partition sizes in MB
-    MODIFY_SQUASH=""   # true/false
-    KERNEL_PARTSIZE="" # variable set in MB
-    ROOTFS_PARTSIZE="" # variable set in MB (values over 8192 may give memory exhaustion errors)
-    IMAGE_TAG=""       # This ID tag will be added to the completed image filename
-    CREATE_VMDK=""     # Create VMware images of the final build true/false
+    MODIFY_SQUASH="true"   # true/false
+    KERNEL_PARTSIZE="1024" # variable set in MB
+    ROOTFS_PARTSIZE="8192" # variable set in MB (values over 8192 may give memory exhaustion errors)
+    IMAGE_TAG="gz-router"       # This ID tag will be added to the completed image filename
+    CREATE_VMDK="false"     # Create VMware images of the final build true/false
 
 # Provide your specific recipe of custom OWRT packages to add to the base installation here. (Below is an example)
-CUSTOM_PACKAGES="blockd block-mount kmod-fs-ext4 kmod-usb2 kmod-usb3 kmod-usb-storage kmod-usb-core usbutils \
-    -dnsmasq dnsmasq-full luci luci-app-ddns luci-app-mwan3 mwan3 luci-app-openvpn openvpn-openssl \
-    luci-app-samba4 luci-app-sqm sqm-scripts sqm-scripts-extra luci-app-attendedsysupgrade auc \
-    curl nano socat tcpdump python3-light python3-netifaces wsdd2 igmpproxy iptables-mod-ipopt \
-    usbmuxd libimobiledevice kmod-usb-net kmod-usb-net-asix-ax88179 kmod-mt7921u kmod-usb-net-rndis kmod-usb-net-ipheth"
-    #luci-app-advanced-reboot
+CUSTOM_PACKAGES="acme adblock apcupsd apcupsd-cgi coreutils coreutils-sort ddns-scripts ddns-scripts-services haproxy  luci-app-acme luci luci-ssl luci-app-adblock luci-app-ddns luci-app-nextdns luci-mod-rpc nextdns openssh-sftp-server  tailscale tailscaled  vim-full wget-ssl restic"
 
 #######################################################################################################################
-# Setup the image builder working environment 
+# Setup the image builder working environment
 #######################################################################################################################
     SOURCE_FILE="${BUILDER##*/}" # Separate the tar.xz file name from the source download link
     SOURCE_DIR="${SOURCE_FILE%%.tar.xz}" # Get the uncompressed tar.xz directory name to set as the build source dir
@@ -54,7 +49,7 @@ CUSTOM_PACKAGES="blockd block-mount kmod-fs-ext4 kmod-usb2 kmod-usb3 kmod-usb-st
     BUILD_LOG="${BUILD_ROOT}/build.log"
 
 #######################################################################################################################
-# Script user prompts 
+# Script user prompts
 #######################################################################################################################
 echo -e ${LYELLOW}
 echo "Image Builder activity will be logged to ${BUILD_LOG}"
@@ -116,7 +111,7 @@ echo
 fi
 
 #######################################################################################################################
-# Begin script build actions 
+# Begin script build actions
 #######################################################################################################################
 # Clear out any previous builds
     rm -rf "${BUILD_ROOT}"
@@ -130,15 +125,15 @@ fi
     chown -R $SUDO_USER $INJECT_FILES
 
 # Option to pre-configure images with injected config files
-    echo -e ${LYELLOW}
-    read -p $"Copy optional config files to ${INJECT_FILES} now for inclusion into the new image. Enter to begin build..."
-    echo -e ${NC}
+#    echo -e ${LYELLOW}
+#    read -p $"Copy optional config files to ${INJECT_FILES} now for inclusion into the new image. Enter to begin build..."
+#    echo -e ${NC}
 
 # Install OWRT build system dependencies for recent Ubuntu/Debian.
 # See here for other distro dependencies: https://openwrt.org/docs/guide-developer/toolchain/install-buildsystem
-    sudo apt-get update  2>&1 | tee -a ${BUILD_LOG}
-    sudo apt-get install -y build-essential clang flex bison g++ gawk gcc-multilib g++-multilib \
-    gettext git libncurses-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget qemu-utils 2>&1 | tee -a ${BUILD_LOG}
+  #  sudo apt-get update  2>&1 | tee -a ${BUILD_LOG}
+  #  sudo apt-get install -y build-essential clang flex bison g++ gawk gcc-multilib g++-multilib \
+  #  gettext git libncurses-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget qemu-utils 2>&1 | tee -a ${BUILD_LOG}
 
 # Download the image builder source if we haven't already
 if [ ! -f "${BUILDER##*/}" ]; then
