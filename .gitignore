@@ -2,7 +2,7 @@
 /.idea/
 /imagebuilder-resize-squashfs/build_output/
 /imagebuilder-resize-squashfs/inject_files/
-/imagebuilder-resize-squashfs/openwrt-imagebuilder-23.05.0-x86-64.Linux-x86_64/
-/imagebuilder-resize-squashfs/openwrt-imagebuilder-23.05.0-x86-64.Linux-x86_64.tar.xz
+/imagebuilder-resize-squashfs/openwrt-imagebuilder-*-x86-64.Linux-x86_64/
+/imagebuilder-resize-squashfs/openwrt-imagebuilder-*-x86-64.Linux-x86_64.tar.xz
 /imagebuilder-resize-squashfs/.resize-squashfs.sh.swp
 /.shell.nix.swp
