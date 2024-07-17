@@ -1,9 +1,14 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
- 
-  buildInputs = with pkgs; [
-    ncurses zlib gawk wget gettext openssl libxslt wget unzip python3 gnumake 
+
+  packages = [
+    (pkgs.python311.withPackages(ps: with pkgs; [ 
+      python311Packages.distutils-extra python311Packages.distlib
+    ]))
   ];
+
+  buildInputs = with pkgs; [
+    ncurses zlib gawk wget gettext openssl libxslt wget unzip gnumake   ];
   
   shellHook = ''
    ssh root@192.168.7.1 "sysupgrade -b /tmp/backup-image-builder.tar.gz"

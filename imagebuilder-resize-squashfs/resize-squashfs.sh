@@ -8,6 +8,8 @@
 
 clear
 
+VERSION="23.05.4"
+
 # Prepare text output colours
 LYELLOW='\033[0;93m'
 LRED='\033[0;91m'
@@ -24,7 +26,7 @@ fi
 # User input variables
 #######################################################################################################################
 # Select the OWRT version to build
-    BUILDER="https://downloads.openwrt.org/releases/23.05.2/targets/x86/64/openwrt-imagebuilder-23.05.2-x86-64.Linux-x86_64.tar.xz"
+    BUILDER="https://downloads.openwrt.org/releases/${VERSION}/targets/x86/64/openwrt-imagebuilder-${VERSION}-x86-64.Linux-x86_64.tar.xz"
     #BUILDER="https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-imagebuilder-x86-64.Linux-x86_64.tar.xz" # Current snapshot
 
 # Select the desired SquashFS partition sizes in MB
@@ -35,7 +37,7 @@ fi
     CREATE_VMDK="false"     # Create VMware images of the final build true/false
 
 # Provide your specific recipe of custom OWRT packages to add to the base installation here. (Below is an example)
-CUSTOM_PACKAGES="acme acme-acmesh-dnsapi adblock apcupsd apcupsd-cgi coreutils coreutils-sort ddns-scripts ddns-scripts-services haproxy  luci-app-acme luci luci-ssl luci-app-adblock luci-app-ddns luci-app-nextdns luci-mod-rpc openssh-sftp-server  tailscale tailscaled  vim-full wget-ssl restic luci-app-watchcat watchcat"
+CUSTOM_PACKAGES="acme acme-acmesh-dnsapi adblock apcupsd apcupsd-cgi coreutils coreutils-sort ddns-scripts ddns-scripts-services haproxy  luci-app-acme luci luci-ssl luci-app-adblock luci-app-ddns luci-mod-rpc openssh-sftp-server  tailscale tailscaled  vim-full wget-ssl restic luci-app-watchcat watchcat"
 
 #######################################################################################################################
 # Setup the image builder working environment
