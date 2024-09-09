@@ -37,7 +37,7 @@ fi
     CREATE_VMDK="false"     # Create VMware images of the final build true/false
 
 # Provide your specific recipe of custom OWRT packages to add to the base installation here. (Below is an example)
-CUSTOM_PACKAGES="acme acme-acmesh-dnsapi apcupsd apcupsd-cgi coreutils coreutils-sort ddns-scripts ddns-scripts-services haproxy  luci-app-acme luci luci-ssl luci-app-ddns luci-mod-rpc openssh-sftp-server  tailscale tailscaled  vim-full wget-ssl restic luci-app-watchcat watchcat"
+CUSTOM_PACKAGES="acme acme-acmesh-dnsapi apcupsd apcupsd-cgi coreutils coreutils-sort ddns-scripts ddns-scripts-services haproxy  luci-app-acme luci luci-ssl luci-app-ddns luci-mod-rpc openssh-sftp-server  tailscale tailscaled  vim-full wget-ssl restic luci-app-watchcat watchcat luci-app-statistics"
 
 #######################################################################################################################
 # Setup the image builder working environment
